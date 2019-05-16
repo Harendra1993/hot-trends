@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {CSSTransitionGroup} from 'react-transition-group';
 import {Card} from '.';
-import {animals, directions, plants, timing} from '../constants';
+import { directions, timing} from '../constants';
 import getRandomValue from '../helpers/getRandomValue';
 
 export default class Tile extends Component {
