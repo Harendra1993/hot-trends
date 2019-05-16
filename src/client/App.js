@@ -1,5 +1,10 @@
-import React, {Component} from 'react';
-import {DataSetSelect, Tile} from './components';
+import React, {
+  Component
+} from 'react';
+import {
+  DataSetSelect,
+  Tile
+} from './components';
 import './App.css';
 
 export default class App extends Component {
@@ -9,14 +14,33 @@ export default class App extends Component {
     tiles: []
   };
 
+  componentDidMount() {
+    // Call our fetch function below once the component mounts
+    this.callBackendAPI()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    this.initializeTiles();
+    window.addEventListener('resize', this.setGridSize);
+  }
+  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+  callBackendAPI = async () => {
+    const response = await fetch('/ping');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+
   componentWillMount() {
     this.setGridSize();
   }
 
-  componentDidMount() {
-    this.initializeTiles();
-    window.addEventListener('resize', this.setGridSize);
-  }
+  // componentDidMount() {
+  //   this.initializeTiles();
+  //   window.addEventListener('resize', this.setGridSize);
+  // }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setGridSize);
@@ -40,10 +64,14 @@ export default class App extends Component {
       rows = 4;
     }
 
-    return this.setState({gridSize: [columns, rows]}, this.initializeTiles);
+    return this.setState({
+      gridSize: [columns, rows]
+    }, this.initializeTiles);
   };
 
-  onChangeDataSet = ({target}) => {
+  onChangeDataSet = ({
+    target
+  }) => {
     this.setState({
       dataSet: target.value,
       tiles: []
@@ -51,7 +79,9 @@ export default class App extends Component {
   };
 
   getGridStyles = () => {
-    const {gridSize} = this.state;
+    const {
+      gridSize
+    } = this.state;
     const columns = gridSize[0];
     const rows = gridSize[1];
     const columnWidth = 100 / columns;
@@ -64,29 +94,54 @@ export default class App extends Component {
   };
 
   initializeTiles = () => {
-    const {dataSet, gridSize} = this.state;
+    const {
+      dataSet,
+      gridSize
+    } = this.state;
     const totalTiles = gridSize[0] * gridSize[1];
     const newTiles = [];
 
     for (let i = 0; i < totalTiles; i++) {
       newTiles.push(
-        (<Tile dataSet={dataSet} key={`tile-${i}`} />)
+        ( < Tile dataSet = {
+            dataSet
+          }
+          key = {
+            `tile-${i}`
+          }
+          />)
+        );
+      }
+
+      this.setState({
+        tiles: newTiles
+      });
+    };
+
+    render() {
+      const {
+        dataSet,
+        tiles
+      } = this.state;
+
+      return ( <
+        div className = "app" >
+        <
+        DataSetSelect dataSet = {
+          dataSet
+        }
+        onChange = {
+          this.onChangeDataSet
+        }
+        /> <
+        div className = "tiles"
+        style = {
+          this.getGridStyles()
+        } > {
+          tiles
+        } <
+        /div> < /
+        div >
       );
     }
-
-    this.setState({tiles: newTiles});
-  };
-
-  render() {
-    const {dataSet, tiles} = this.state;
-
-    return (
-      <div className="app">
-        <DataSetSelect dataSet={dataSet} onChange={this.onChangeDataSet} />
-        <div className="tiles" style={this.getGridStyles()}>
-          {tiles}
-        </div>
-      </div>
-    );
   }
-}
