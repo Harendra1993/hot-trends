@@ -1,33 +1,129 @@
-.App {
-  text-align: center;
+.dataSet {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1;
+  color: #fff;
+  font-size: 12px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.dataSetSelect {
+  display: inline-block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.dataSetSelect select {
+  background: transparent;
+  margin-left: 5px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px dotted #fff;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.dataSetSelect select:focus {
+  outline: none;
+}
+
+.tiles {
+  display: grid;
+  height: 100vh;
+}
+
+.tile {
   display: flex;
-  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 10%;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  transition: all 800ms cubic-bezier(0, 1, 1, 1);
 }
 
-.App-link {
-  color: #61dafb;
+.text {
+  transition: opacity 800ms ease 200ms;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card .cursor {
+  color: #fff;
+  font-weight: 100;
+  white-space: nowrap;
+}
+
+.card:not(.typing) .cursor {
+  animation: 1s blink step-end infinite;
+}
+
+.bottom-enter .text,
+.top-enter .text,
+.left-enter .text,
+.right-enter .text {
+  opacity: 0;
+}
+
+.bottom-enter.bottom-enter-active .text,
+.bottom-leave .text,
+.top-enter.top-enter-active .text,
+.top-leave .text,
+.left-enter.left-enter-active .text,
+.left-leave .text,
+.right-enter.right-enter-active .text,
+.right-leave .text {
+  opacity: 1;
+}
+
+.bottom-enter.bottom-enter-active,
+.bottom-leave,
+.top-enter.top-enter-active,
+.top-leave,
+.left-enter.left-enter-active,
+.left-leave,
+.right-enter.right-enter-active,
+.right-leave  {
+  transform: translate3d(0, 0, 0);
+}
+
+.bottom-enter,
+.top-leave.top-leave-active {
+  transform: translate3d(0, 100%, 0);
+}
+
+.bottom-leave.bottom-leave-active,
+.top-enter {
+  transform: translate3d(0, -100%, 0);
+}
+
+.left-enter,
+.right-leave.right-leave-active {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.left-leave.left-leave-active,
+.right-enter {
+  transform: translate3d(100%, 0, 0);
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    color: transparent;
   }
 }
