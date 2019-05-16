@@ -1,15 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser')
-const path = require('path');
-const app = express();
-app.use(express.static(path.join(__dirname, 'build')));
+const express = require('express')
+const consola = require('consola')
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const routes = require('./api/routes');
 
-app.get('/ping', function (req, res) {
- return res.send('pong');
-});
+const app = express()
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+async function start() {
 
-app.listen(process.env.PORT || 8080);
+  // Response middleware
+  app.use(methodOverride());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+
+  // Routes middleware
+  app.use('/api', routes);
+
+  // Listen the server
+  const host='localhost';
+  const port=8080;
+  //app.listen(port, host)
+  app.listen(port);
+  consola.ready({
+    message: `Server listening on http://${host}:${port}`,
+    badge: true
+  })
+}
+start()

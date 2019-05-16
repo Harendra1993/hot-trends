@@ -6,6 +6,7 @@ import {
   Tile
 } from './components';
 import './App.css';
+const axios = require('axios');
 
 export default class App extends Component {
   state = {
@@ -16,21 +17,20 @@ export default class App extends Component {
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    this.callBackendAPI();
+
     this.initializeTiles();
     window.addEventListener('resize', this.setGridSize);
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/ping');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message)
-    }
-    return body;
+  callBackendAPI = () => {
+    axios.get('/api/trends')
+      .then(res=> {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   componentWillMount() {
@@ -124,8 +124,7 @@ export default class App extends Component {
         tiles
       } = this.state;
 
-      return ( <
-        div className = "app" >
+      return ( < div className = "app" >
         <
         DataSetSelect dataSet = {
           dataSet
@@ -133,15 +132,13 @@ export default class App extends Component {
         onChange = {
           this.onChangeDataSet
         }
-        /> <
+        />  <
         div className = "tiles"
         style = {
           this.getGridStyles()
         } > {
           tiles
-        } <
-        /div> < /
-        div >
+        } < /div> </div >
       );
     }
   }
