@@ -8,14 +8,11 @@ export default class Tile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: getRandomValue(this.dataSets[props.dataSet])
+      value: getRandomValue(props.dataSets[props.dataSet])
     };
-  }
 
-  dataSets = {
-    'animals': animals,
-    'plants': plants
-  };
+    this.dataSets=props.dataSets;
+  }
 
   componentDidMount() {
     this.setTimer();
