@@ -34,7 +34,7 @@ export default function({dataSet, onChange}) {
           <option value="malaysia">Malaysia</option>
           <option value="mexico">Mexico</option>
           <option value="netherlands">Netherlands</option>
-          <option value="nigeria">Nigeria"</option>
+          <option value="nigeria">Nigeria</option>
           <option value="norway">Norway</option>
           <option value="philippines">Philippines</option>
           <option value="poland">Poland</option>
