@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {colors, timing} from '../constants';
-import {getRandomValue} from '../helpers/getRandomValue';
+import React, { Component } from 'react';
+import { colors, timing } from '../constants';
+import { getRandomValue } from '../helpers/getRandomValue';
 
 export default class Card extends Component {
   state = {
@@ -17,10 +17,10 @@ export default class Card extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {value} = this.props;
+    const { value } = this.props;
 
     if (prevProps.value !== value) {
-      this.setState({visibleChars: 0}, this.initializeCard);
+      this.setState({ visibleChars: 0 }, this.initializeCard);
     }
   }
 
@@ -33,12 +33,12 @@ export default class Card extends Component {
   };
 
   incrementVisibleChars = () => {
-    const {value} = this.props;
-    const {visibleChars} = this.state;
+    const { value } = this.props;
+    const { visibleChars } = this.state;
 
     if (visibleChars === value.length) {
       clearInterval(this.timer);
-      return this.setState({isTyping: false});
+      return this.setState({ isTyping: false });
     }
 
     this.setState(prevState => {
@@ -50,13 +50,15 @@ export default class Card extends Component {
   };
 
   render() {
-    const {isTyping, visibleChars} = this.state;
-    const {value} = this.props;
+    const { isTyping, visibleChars } = this.state;
+    const { value } = this.props;
     const typingClass = isTyping ? 'typing' : '';
 
     return (
-      <div style={{background: this.color}} className={`card ${typingClass}`}>
-        <a className="text" href={`https://www.google.com/search?q=${value}`} target="_blank">{value.substring(0, visibleChars)}<span className="cursor">|</span></a>
+      <div style={{ background: this.color }} className={`card ${typingClass}`}>
+        <a className="text" href={`https://www.google.com/search?q=${value}`} target="_blank" rel="noopener noreferrer">
+          {value.substring(0, visibleChars)}<span className="cursor">|</span>
+        </a>
       </div>
     );
   }
