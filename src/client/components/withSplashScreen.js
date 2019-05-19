@@ -24,7 +24,6 @@ function withSplashScreen(WrappedComponent) {
         async componentDidMount() {
             try {
                 await getTrends((res) => {
-                    console.log(res)
                     this.setState({
                         dataSets: res
                     })

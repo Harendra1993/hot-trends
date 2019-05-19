@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import {CSSTransitionGroup} from 'react-transition-group';
 import {Card} from '.';
 import { directions, timing} from '../constants';
-import getRandomValue from '../helpers/getRandomValue';
+import {getRandomValue,getRandomData} from '../helpers/getRandomValue';
 
 export default class Tile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: getRandomValue(props.dataSets[props.dataSet])
+      value: getRandomData(props.dataSets,props.dataSet)
     };
-
-    this.dataSets=props.dataSets;
   }
 
   componentDidMount() {
@@ -33,12 +31,12 @@ export default class Tile extends Component {
   };
 
   setNewValue = () => {
-    const {dataSet} = this.props;
+    const {dataSet,dataSets} = this.props;
     clearInterval(this.timer);
 
     this.setState(prevState => {
       return {
-        value: getRandomValue(this.dataSets[dataSet])
+        value: getRandomData(dataSets,dataSet)
       };
     }, () => {
       this.setTimer();

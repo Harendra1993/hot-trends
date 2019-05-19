@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {colors, timing} from '../constants';
-import getRandomValue from '../helpers/getRandomValue';
+import {getRandomValue} from '../helpers/getRandomValue';
 
 export default class Card extends Component {
   state = {
