@@ -1,18 +1,12 @@
-import React, {
-  Component
-} from 'react';
-import {
-  DataSetSelect,
-  Tile
-} from './components';
+import React, { Component } from 'react';
+import { DataSetSelect, Tile } from './components';
+import withSplashScreen from './components/withSplashScreen';
+
 import './App.css';
 
-const axios = require('axios');
-
-
-export default class App extends Component {
+class App extends Component {
   state = {
-    dataSets:{},
+    dataSets: {},
     dataSet: 'saudi_arabia',
     gridSize: [5, 5],
     tiles: []
@@ -23,7 +17,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.callBackendAPI();
+    //this.callBackendAPI();
     this.initializeTiles();
     window.addEventListener('resize', this.setGridSize);
   }
@@ -32,18 +26,7 @@ export default class App extends Component {
     window.removeEventListener('resize', this.setGridSize);
   }
 
-     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-    callBackendAPI = () => {
-      axios.get('/api/trends')
-        .then(res => {
-          this.setState({
-            dataSets: res.data
-          }, this.initializeTiles);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
+
 
   setGridSize = () => {
     let columns = 5;
@@ -95,29 +78,28 @@ export default class App extends Component {
   initializeTiles = () => {
     const {
       dataSet,
-      dataSets,
       gridSize
     } = this.state;
     const totalTiles = gridSize[0] * gridSize[1];
     const newTiles = [];
-    console.log(this.state);
-    
-if(this.state && Object.keys(dataSets).length !== 0 && dataSets.constructor === Object){
-  for (let i = 0; i < totalTiles; i++) {
-    newTiles.push(
-      (< Tile dataSet={
-        dataSet
+    // console.log(this.state);
+
+    if (this.props && Object.keys(this.props.dataSets).length !== 0 && this.props.dataSets.constructor === Object) {
+      for (let i = 0; i < totalTiles; i++) {
+        newTiles.push(
+          (< Tile dataSet={
+            dataSet
+          }
+            dataSets={
+              this.props.dataSets
+            }
+            key={
+              `tile-${i}`
+            }
+          />)
+        );
       }
-      dataSets={
-        dataSets
-      }
-        key={
-          `tile-${i}`
-        }
-      />)
-    );
-  }
-}
+    }
 
 
     this.setState({
@@ -149,3 +131,5 @@ if(this.state && Object.keys(dataSets).length !== 0 && dataSets.constructor === 
     );
   }
 }
+
+export default withSplashScreen(App);
