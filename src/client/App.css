@@ -26,6 +26,11 @@
   -webkit-appearance: none;
 }
 
+.dataSetSelect select option {
+  background: #fff;
+  color: #000;
+}
+
 .dataSetSelect select:focus {
   outline: none;
 }

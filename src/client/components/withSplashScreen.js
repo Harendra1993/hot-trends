@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getTrends } from '../helpers/getTrends';
+import { getTrends } from '../helpers/requests';
 import './splash-screen.css';
 
 function LoadingMessage() {
