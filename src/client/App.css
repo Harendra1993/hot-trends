@@ -63,6 +63,9 @@
 
 .text {
   transition: opacity 800ms ease 200ms;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .card .cursor {

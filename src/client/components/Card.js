@@ -56,7 +56,7 @@ export default class Card extends Component {
 
     return (
       <div style={{background: this.color}} className={`card ${typingClass}`}>
-        <span className="text">{value.substring(0, visibleChars)}<span className="cursor">|</span></span>
+        <a className="text" href={`https://www.google.com/search?q=${value}`} target="_blank">{value.substring(0, visibleChars)}<span className="cursor">|</span></a>
       </div>
     );
   }
