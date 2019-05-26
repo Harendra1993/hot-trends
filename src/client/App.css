@@ -5,6 +5,7 @@
   z-index: 1;
   color: #fff;
   font-size: 12px;
+  width: auto;
 }
 
 .dataSetSelect {
@@ -17,12 +18,14 @@
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 1px dotted #fff;
+  border-bottom:none;
+  /* border-bottom: 1px dotted #fff; */
   border-radius: 0;
   font-size: 12px;
   font-weight: 900;
   color: #fff;
   cursor: pointer;
+  width: auto;
   -webkit-appearance: none;
 }
 
@@ -103,7 +106,7 @@
 .left-enter.left-enter-active,
 .left-leave,
 .right-enter.right-enter-active,
-.right-leave  {
+.right-leave {
   transform: translate3d(0, 0, 0);
 }
 
@@ -128,9 +131,12 @@
 }
 
 @keyframes blink {
-  from, to {
+
+  from,
+  to {
     color: transparent;
   }
+
   50% {
     color: transparent;
   }

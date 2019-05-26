@@ -127,9 +127,15 @@ class App extends Component {
         } > {
           tiles
         } </div>
-    </div >
-    );
-  }
-}
 
+      <div className="logo">
+        <img src="./logo.png" alt="World Trends"/>
+      </div>
+
+      </div >
+
+      );
+    }
+  }
+  
 export default withSplashScreen(App);

@@ -6,3 +6,14 @@ body,
   margin: 0;
   padding: 0;
 }
+
+.logo{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.logo>img{
+  height: 30px;
+  width: 200px;
+}
