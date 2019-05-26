@@ -1,6 +1,6 @@
-import Card from './Card';
-import DataSetSelect from './DataSetSelect';
-import Tile from './Tile';
+import Card from './Card.jsx';
+import DataSetSelect from './DataSetSelect.jsx';
+import Tile from './Tile.jsx';
 
 export {
   Card,

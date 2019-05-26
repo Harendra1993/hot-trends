@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DataSetSelect, Tile } from './components';
-import withSplashScreen from './components/withSplashScreen';
+import withSplashScreen from './components/withSplashScreen.jsx';
 
 import './App.css';
 
