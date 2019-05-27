@@ -18,7 +18,7 @@
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom:none;
+  border-bottom: none;
   /* border-bottom: 1px dotted #fff; */
   border-radius: 0;
   font-size: 12px;
@@ -128,6 +128,43 @@
 .left-leave.left-leave-active,
 .right-enter {
   transform: translate3d(100%, 0, 0);
+}
+
+.splash-screen {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /*centers items on the line (the x-axis by default)*/
+  align-items: center;
+  /*centers items on the cross-axis (y by default)*/
+}
+
+.splash-screen .loading-dot {
+  font-size: 100px;
+  margin-top: -80px;
+  position: relative;
+  animation: ease-in-out infinite alternate;
+  animation-name: run;
+  animation-duration: 1.2s;
+}
+
+@keyframes run {
+  0% {
+    left: -390px;
+    color: #eee;
+  }
+
+  50% {
+    color: #666;
+  }
+
+  100% {
+    left: 90px;
+    color: #eee;
+  }
 }
 
 @keyframes blink {

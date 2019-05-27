@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getTrends } from '../helpers/requests';
-import './splash-screen.css';
+import '../App.css';
 
 function LoadingMessage() {
     return (
