@@ -35,11 +35,13 @@ function withSplashScreen(WrappedComponent) {
                     });
                 }, 1500)
             } catch (err) {
-                console.log(err);
+                //console.log(err);
                 this.setState({
                     loading: false,
                 });
             }
+
+            setInterval(getTrends, 15 * 60 * 1000)
         }
 
         render() {

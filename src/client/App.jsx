@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DataSetSelect, Tile } from './components';
-import withSplashScreen from './components/withSplashScreen.jsx';
+import SplashScreen from './components/SplashScreen.jsx';
 
 import './App.css';
 
@@ -138,4 +138,4 @@ class App extends Component {
     }
   }
   
-export default withSplashScreen(App);
+export default SplashScreen(App);
