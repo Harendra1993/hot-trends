@@ -1,5 +1,6 @@
-const express = require('express')
-const consola = require('consola')
+const express = require('express');
+const path = require('path');
+const consola = require('consola');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const routes = require('./api/routes');
@@ -14,6 +15,14 @@ async function start() {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+
+  // servers build directory of react
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
 
   // Routes middleware
   app.use('/api', routes);
