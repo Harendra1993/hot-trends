@@ -18,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prod": "node app",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

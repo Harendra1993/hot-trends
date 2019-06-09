@@ -17,10 +17,10 @@ async function start() {
   }));
 
   // servers build directory of react
-  app.use(express.static(path.join(__dirname, 'build')));
+  app.use(express.static(path.join(__dirname, '../../build')));
 
   app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
   });
 
 
