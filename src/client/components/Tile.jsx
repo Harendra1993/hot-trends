@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {CSSTransitionGroup} from 'react-transition-group';
 import {Card} from '.';
 import { directions, timing} from '../constants';
-import {getRandomValue,getRandomData} from '../helpers/getRandomValue';
+import {getRandomValue,getRandomData} from '../helpers/utils';
 
 export default class Tile extends Component {
   constructor(props) {

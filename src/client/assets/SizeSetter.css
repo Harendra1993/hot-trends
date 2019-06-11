@@ -1,0 +1,57 @@
+.Size-Setter {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 200px;
+    height: 200px;
+    z-index: 9000;
+  }
+  
+  .Size-Setter_grid {
+    visibility: hidden;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(5, 25px);
+    grid-template-rows: repeat(5, 25px);
+    grid-gap: 5px;
+  }
+  
+  .Size-Setter_grid.is-active {
+    visibility: visible;
+  }
+  
+  .Size-Setter_item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid white;
+    transition: background-color 0.2s;
+  }
+  
+  .Size-Setter_item:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .Size-Setter_button {
+    visibility: hidden;
+  }
+  
+  .Size-Setter_button.is-active {
+    visibility: visible;
+  }
+  
+  .Size-Setter_button-icon {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s;
+  }
+  
+  .Size-Setter_button-icon:hover {
+    box-shadow: 0px 5x 5px 1px rgba(0, 0, 0, 0.25);
+  }

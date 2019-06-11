@@ -1,23 +1,35 @@
 import React, { Component } from 'react';
-import { DataSetSelect, Tile } from './components';
+import { DataSetSelect, Tile, SizeSetter } from './components';
+import {getGridSize,isArrayEqual} from './helpers/utils';
 import SplashScreen from './components/SplashScreen.jsx';
 
 import './App.css';
 
 class App extends Component {
-  state = {
-    dataSets: {},
-    dataSet: 'saudi_arabia',
-    gridSize: [5, 5],
-    tiles: []
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSets: {},
+      dataSet: 'saudi_arabia',
+      maxGridSize: [5, 5],
+      gridSize: [5, 5],
+      tiles: []
+    };
+
+    this.setGridSize = this.setGridSize.bind(this);
+  }
 
   componentWillMount() {
     this.setGridSize();
   }
 
   componentDidMount() {
-    //this.callBackendAPI();
+    const gridSize = getGridSize(window.innerWidth, window.innerHeight);
+    this.setState({
+      gridSize
+    });
+    
     this.initializeTiles();
     window.addEventListener('resize', this.setGridSize);
   }
@@ -28,28 +40,46 @@ class App extends Component {
 
 
 
-  setGridSize = () => {
-    let columns = 5;
-    let rows = 5;
+  // setGridSize = () => {
+  //   let columns = 5;
+  //   let rows = 5;
 
-    if (window.innerWidth < 400) {
-      columns = 1;
-      rows = 2;
-    } else if (window.innerWidth < 600) {
-      columns = 2;
-      rows = 3;
-    } else if (window.innerWidth < 1000) {
-      columns = 3;
-      rows = 3;
-    } else if (window.innerWidth < 1200) {
-      columns = 4;
-      rows = 4;
+  //   if (window.innerWidth < 400) {
+  //     columns = 1;
+  //     rows = 2;
+  //   } else if (window.innerWidth < 600) {
+  //     columns = 2;
+  //     rows = 3;
+  //   } else if (window.innerWidth < 1000) {
+  //     columns = 3;
+  //     rows = 3;
+  //   } else if (window.innerWidth < 1200) {
+  //     columns = 4;
+  //     rows = 4;
+  //   }
+
+  //   return this.setState({
+  //     gridSize: [columns, rows]
+  //   }, this.initializeTiles);
+  // };
+
+  
+
+  setGridSize(size = []) {
+    if (
+      Array.isArray(size) &&
+      size.length === 2 &&
+      !isArrayEqual(size, this.state.gridSize)
+    ) {
+      const [columns,rows] = size;
+      //this.updateTrendPositions(size);
+      console.log(size)
+      this.setState({
+        gridSize: [size[1],size[0]],
+        trendItemCount:  columns*rows,
+      });
     }
-
-    return this.setState({
-      gridSize: [columns, rows]
-    }, this.initializeTiles);
-  };
+  }
 
   onChangeDataSet = ({
     target
@@ -114,6 +144,10 @@ class App extends Component {
     } = this.state;
 
     return (<div className="app">
+      <SizeSetter
+        maxGridSize={this.state.maxGridSize}
+        setGridSize={this.setGridSize}
+      />
       <DataSetSelect dataSet={
         dataSet
       }
@@ -129,13 +163,13 @@ class App extends Component {
         } </div>
 
       <div className="logo">
-        <img src="./logo.png" alt="World Trends"/>
+        <img src="./logo.png" alt="World Trends" />
       </div>
 
-      </div >
+    </div >
 
-      );
-    }
+    );
   }
-  
+}
+
 export default SplashScreen(App);
