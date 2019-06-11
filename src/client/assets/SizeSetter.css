@@ -44,11 +44,8 @@
     position: absolute;
     left: 0;
     top: 0;
-    height: 24px;
-    width: 24px;
     color: rgba(255, 255, 255, 0.8);
-    border-radius: 25px;
-    padding: 10px;
+    padding: 0px;
   }
   
   .Size-Setter_button-icon:hover {

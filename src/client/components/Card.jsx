@@ -51,11 +51,11 @@ export default class Card extends Component {
 
   render() {
     const { isTyping, visibleChars } = this.state;
-    const { value } = this.props;
+    const { value, fontSize } = this.props;
     const typingClass = isTyping ? 'typing' : '';
 
     return (
-      <div style={{ background: this.color }} className={`card ${typingClass}`}>
+      <div style={{ background: this.color, fontSize: fontSize }} className={`card ${typingClass}`}>
         <a className="text" href={`https://www.google.com/search?q=${value}`} target="_blank" rel="noopener noreferrer">
           {value.substring(0, visibleChars)}<span className="cursor">|</span>
         </a>

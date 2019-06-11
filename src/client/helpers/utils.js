@@ -63,11 +63,79 @@ function getGridSize(width, height) {
         rows = 1;
     }
 
-    return [columns,rows];
+    return [columns, rows];
 }
 
-function isUndefined(obj){
+function isUndefined(obj) {
     return obj === void 0;
+}
+
+function getFontSize(columns, rows) {
+    let size = 0;
+    // console.log('row',rows)
+    // console.log('columns',columns)
+    switch (columns) {
+        case 1:
+            if (rows >= 4) {
+                size = 28;
+            } else if (rows === 3) {
+                size = 52;
+            } else if (rows === 2) {
+                size = 100;
+            } else if (rows === 1) {
+                size = 152;
+            }
+            break;
+
+        case 2:
+            if (rows >= 4) {
+                size = 28;
+            } else if (rows === 3) {
+                size = 52;
+            } else if (rows === 2) {
+                size = 100;
+            } else if (rows === 1) {
+                size = 152;
+            }
+            break;
+
+        case 3:
+            if (rows >= 4) {
+                size = 28;
+            } else if (rows === 3) {
+                size = 52;
+            } else if (rows === 2) {
+                size = 100;
+            } else if (rows === 1) {
+                size = 152;
+            }
+            break;
+
+        case 4:
+            if (rows >= 4) {
+                size = 28;
+            } else if (rows === 3) {
+                size = 52;
+            } else if (rows === 2) {
+                size = 100;
+            } else if (rows === 1) {
+                size = 152;
+            }
+            break;
+
+        case 5:
+            if (rows >= 4) {
+                size = 28;
+            } else {
+                size = 52;
+            } 
+            break;
+
+        default:
+            break;
+    }
+
+    return size;
 }
 
 export {
@@ -75,5 +143,6 @@ export {
     getRandomValue,
     getGridSize,
     isArrayEqual,
-    isUndefined
+    isUndefined,
+    getFontSize
 };

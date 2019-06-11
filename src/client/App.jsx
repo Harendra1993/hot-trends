@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DataSetSelect, Tile, SizeSetter } from './components';
-import { getGridSize, isArrayEqual, isUndefined } from './helpers/utils';
+import { getGridSize, isArrayEqual, isUndefined, getFontSize } from './helpers/utils';
 import SplashScreen from './components/SplashScreen.jsx';
 
 import './App.css';
@@ -14,7 +14,8 @@ class App extends Component {
       dataSet: 'saudi_arabia',
       maxGridSize: [5, 5],
       gridSize: [5, 5],
-      tiles: []
+      tiles: [],
+      fontSize: 28
     };
 
     this.setGridSize = this.setGridSize.bind(this);
@@ -46,17 +47,16 @@ class App extends Component {
     ) {
       const [columns, rows] = size;
       //this.updateTrendPositions(size);
-      console.log(size)
+
       this.setState({
         gridSize: [size[1], size[0]],
         trendItemCount: columns * rows,
-      });
+        fontSize: getFontSize(size[1], size[0])
+      }, this.initializeTiles);
     }
   }
 
-  onChangeDataSet = ({
-    target
-  }) => {
+  onChangeDataSet = ({ target }) => {
     this.setState({
       dataSet: target.value,
       tiles: []
@@ -81,8 +81,10 @@ class App extends Component {
   initializeTiles = () => {
     const {
       dataSet,
-      gridSize
+      gridSize,
+      fontSize
     } = this.state;
+
     const totalTiles = gridSize[0] * gridSize[1];
     const newTiles = [];
     // console.log(this.state);
@@ -90,17 +92,11 @@ class App extends Component {
       if (this.props && Object.keys(this.props.dataSets).length !== 0 && this.props.dataSets.constructor === Object) {
         for (let i = 0; i < totalTiles; i++) {
           newTiles.push(
-            (< Tile dataSet={
-              dataSet
-            }
-              dataSets={
-                this.props.dataSets
-              }
-              key={
-                `tile-${i}`
-              }
-            />)
+            (< Tile dataSet={dataSet}
+              dataSets={this.props.dataSets}
+              key={`tile-${i}`} fontSize={fontSize} />)
           );
+          console.log(fontSize)
         }
       }
     } else {
@@ -118,30 +114,24 @@ class App extends Component {
       tiles
     } = this.state;
 
-    return (<div className="app">
-      <SizeSetter
-        maxGridSize={this.state.maxGridSize}
-        setGridSize={this.setGridSize}
-      />
-      <DataSetSelect dataSet={
-        dataSet
-      }
-        onChange={
-          this.onChangeDataSet
-        }
-      />
-      <div className="tiles"
-        style={
-          this.getGridStyles()
-        } > {
-          tiles
-        } </div>
+    return (
+      <div className="app">
+        <SizeSetter
+          maxGridSize={this.state.maxGridSize}
+          setGridSize={this.setGridSize}
+        />
 
-      <div className="logo">
-        <img src="./logo.png" alt="World Trends" />
-      </div>
+        <DataSetSelect dataSet={dataSet} onChange={this.onChangeDataSet} />
 
-    </div >
+        <div className="tiles" style={this.getGridStyles()} >
+          {tiles}
+        </div>
+
+        <div className="logo">
+          <img src="./logo.png" alt="World Trends" />
+        </div>
+
+      </div >
 
     );
   }

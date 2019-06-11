@@ -46,6 +46,7 @@ export default class Tile extends Component {
   render() {
     const {value} = this.state;
     const {animation} = timing;
+    const {fontSize}=this.props;
 
     return (
       <CSSTransitionGroup
@@ -53,7 +54,7 @@ export default class Tile extends Component {
         transitionName={getRandomValue(directions)}
         transitionEnterTimeout={animation}
         transitionLeaveTimeout={animation}>
-        <Card key={value} value={value} />
+        <Card key={value} value={value} fontSize={fontSize} />
       </CSSTransitionGroup>
     );
   }
