@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DataSetSelect, Tile, SizeSetter } from './components';
-import {getGridSize,isArrayEqual} from './helpers/utils';
+import { getGridSize, isArrayEqual, isUndefined } from './helpers/utils';
 import SplashScreen from './components/SplashScreen.jsx';
 
 import './App.css';
@@ -29,7 +29,7 @@ class App extends Component {
     this.setState({
       gridSize
     });
-    
+
     this.initializeTiles();
     window.addEventListener('resize', this.setGridSize);
   }
@@ -38,45 +38,18 @@ class App extends Component {
     window.removeEventListener('resize', this.setGridSize);
   }
 
-
-
-  // setGridSize = () => {
-  //   let columns = 5;
-  //   let rows = 5;
-
-  //   if (window.innerWidth < 400) {
-  //     columns = 1;
-  //     rows = 2;
-  //   } else if (window.innerWidth < 600) {
-  //     columns = 2;
-  //     rows = 3;
-  //   } else if (window.innerWidth < 1000) {
-  //     columns = 3;
-  //     rows = 3;
-  //   } else if (window.innerWidth < 1200) {
-  //     columns = 4;
-  //     rows = 4;
-  //   }
-
-  //   return this.setState({
-  //     gridSize: [columns, rows]
-  //   }, this.initializeTiles);
-  // };
-
-  
-
   setGridSize(size = []) {
     if (
       Array.isArray(size) &&
       size.length === 2 &&
       !isArrayEqual(size, this.state.gridSize)
     ) {
-      const [columns,rows] = size;
+      const [columns, rows] = size;
       //this.updateTrendPositions(size);
       console.log(size)
       this.setState({
-        gridSize: [size[1],size[0]],
-        trendItemCount:  columns*rows,
+        gridSize: [size[1], size[0]],
+        trendItemCount: columns * rows,
       });
     }
   }
@@ -113,24 +86,26 @@ class App extends Component {
     const totalTiles = gridSize[0] * gridSize[1];
     const newTiles = [];
     // console.log(this.state);
-
-    if (this.props && Object.keys(this.props.dataSets).length !== 0 && this.props.dataSets.constructor === Object) {
-      for (let i = 0; i < totalTiles; i++) {
-        newTiles.push(
-          (< Tile dataSet={
-            dataSet
-          }
-            dataSets={
-              this.props.dataSets
+    if (!isUndefined(this.props.dataSets)) {
+      if (this.props && Object.keys(this.props.dataSets).length !== 0 && this.props.dataSets.constructor === Object) {
+        for (let i = 0; i < totalTiles; i++) {
+          newTiles.push(
+            (< Tile dataSet={
+              dataSet
             }
-            key={
-              `tile-${i}`
-            }
-          />)
-        );
+              dataSets={
+                this.props.dataSets
+              }
+              key={
+                `tile-${i}`
+              }
+            />)
+          );
+        }
       }
+    } else {
+      window.location.reload();
     }
-
 
     this.setState({
       tiles: newTiles

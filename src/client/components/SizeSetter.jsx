@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import gridIcon from "../assets/baseline-grid_on-24px.svg";
 import "../assets/SizeSetter.css";
 
 const style = {};
@@ -69,11 +68,8 @@ export default class SizeSetter extends Component {
                         "is-active"}`}
                     onMouseEnter={this.handleMouseToggleGridButton}
                 >
-                    <img
-                        src={gridIcon}
-                        className="Size-Setter_button-icon"
-                        alt="grid activator"
-                    />
+                <i className="fa fa-th fa-2x Size-Setter_button-icon"></i>
+
                 </div>
             </div>
         );

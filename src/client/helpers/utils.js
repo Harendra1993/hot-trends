@@ -66,9 +66,14 @@ function getGridSize(width, height) {
     return [columns,rows];
 }
 
+function isUndefined(obj){
+    return obj === void 0;
+}
+
 export {
     getRandomData,
     getRandomValue,
     getGridSize,
     isArrayEqual,
+    isUndefined
 };
