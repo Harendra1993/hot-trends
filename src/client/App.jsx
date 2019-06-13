@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       dataSets: {},
-      dataSet: 'saudi_arabia',
+      dataSet: 'all_regions',
       maxGridSize: [5, 5],
       gridSize: [5, 5],
       tiles: [],

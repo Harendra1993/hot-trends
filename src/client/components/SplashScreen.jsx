@@ -6,7 +6,7 @@ function LoadingMessage() {
     return (
         <div className="splash-screen">
             Wait a moment while we load your app.
-      <div className="loading-dot">.</div>
+            <div className="loading-dot">.</div>
         </div>
     );
 }
@@ -16,32 +16,41 @@ function withSplashScreen(WrappedComponent) {
         constructor(props) {
             super(props);
             this.state = {
-                loading: true,
-            };
+                loading: true
+            }
+            this.handleTrends = this.handleTrends.bind(this);
         }
 
-
-        async componentDidMount() {
+        handleTrends() {
             try {
-                await getTrends((res) => {
+                getTrends((res) => {
                     this.setState({
                         dataSets: res
                     })
                 })
-
-                setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                    });
-                }, 1500)
             } catch (err) {
-                //console.log(err);
+                console.log(err);
                 this.setState({
-                    loading: false,
-                });
+                    loading: false
+                })
             }
+        }
 
-            setInterval(getTrends, 15 * 60 * 1000)
+
+        async componentDidMount() {
+            await this.handleTrends()
+
+            setTimeout(() => {
+                this.setState({
+                    loading: false
+                });
+            }, 1500)
+
+            this.interval = setInterval(this.handleTrends, 15 * 60 * 1000)
+        }
+
+        componentWillUnmount() {
+            clearInterval(this.interval);
         }
 
         render() {

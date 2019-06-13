@@ -39,27 +39,23 @@ function getGridSize(width, height) {
     let rows = 0;
     let columns = 0;
 
-    if (width > 1400) {
+    if (width > 1200) {
         columns = 5;
-    } else if (width <= 1400 && width > 1200) {
-        columns = 4;
     } else if (width <= 1200 && width > 900) {
-        columns = 3;
+        columns = 4;
     } else if (width <= 900 && width > 600) {
         columns = 2;
     } else {
         columns = 1;
     }
 
-    if (height > 1400) {
+    if (height > 900) {
         rows = 5;
-    } else if (height <= 1400 && height > 1200) {
+    }  else if (height <= 900 && height > 600) {
         rows = 4;
-    } else if (height <= 1200 && height > 900) {
-        rows = 3;
-    } else if (height <= 900 && height > 600) {
+    } else if (height <= 600 && height > 300) {
         rows = 2;
-    } else {
+    }  else {
         rows = 1;
     }
 
@@ -114,12 +110,8 @@ function getFontSize(columns, rows) {
         case 4:
             if (rows >= 4) {
                 size = 28;
-            } else if (rows === 3) {
-                size = 52;
-            } else if (rows === 2) {
-                size = 100;
-            } else if (rows === 1) {
-                size = 152;
+            } else {
+                size = 42;
             }
             break;
 
@@ -128,7 +120,7 @@ function getFontSize(columns, rows) {
                 size = 28;
             } else {
                 size = 52;
-            } 
+            }
             break;
 
         default:
