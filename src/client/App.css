@@ -47,6 +47,9 @@
   display: flex;
   position: relative;
   overflow: hidden;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 .card {
