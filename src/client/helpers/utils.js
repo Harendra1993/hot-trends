@@ -51,11 +51,11 @@ function getGridSize(width, height) {
 
     if (height > 900) {
         rows = 5;
-    }  else if (height <= 900 && height > 600) {
+    } else if (height <= 900 && height > 600) {
         rows = 4;
     } else if (height <= 600 && height > 300) {
         rows = 2;
-    }  else {
+    } else {
         rows = 1;
     }
 
@@ -108,16 +108,20 @@ function getFontSize(columns, rows) {
             break;
 
         case 4:
-            if (rows >= 4) {
+            if (rows === 5) {
                 size = 28;
+            } else if (rows === 4) {
+                size = 36;
             } else {
                 size = 42;
             }
             break;
 
         case 5:
-            if (rows >= 4) {
+            if (rows === 5) {
                 size = 28;
+            } else if (rows === 4) {
+                size = 36;
             } else {
                 size = 52;
             }
