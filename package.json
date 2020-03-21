@@ -1,8 +1,8 @@
 {
-  "name": "world_trends",
+  "name": "hot_trends",
   "version": "0.1.0",
   "private": true,
-  "author": "har",
+  "author": "harendra",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.19.0",

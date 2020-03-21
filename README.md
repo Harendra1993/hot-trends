@@ -1,3 +1,4 @@
+This project is clone of (https://trends.google.com/trends/hottrends/visualize)
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
