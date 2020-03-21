@@ -1,17 +1,21 @@
-import React, { Component } from 'react';
-import { DataSetSelect, Tile, SizeSetter } from './components';
-import { getGridSize, isArrayEqual, isUndefined, getFontSize } from './helpers/utils';
-import SplashScreen from './components/SplashScreen.jsx';
+import React, { Component } from "react";
+import { DataSetSelect, Tile, SizeSetter } from "./components";
+import {
+  getGridSize,
+  isArrayEqual,
+  isUndefined,
+  getFontSize
+} from "./helpers/utils";
+import SplashScreen from "./components/SplashScreen.jsx";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       dataSets: {},
-      dataSet: 'all_regions',
+      dataSet: "all_regions",
       maxGridSize: [5, 5],
       gridSize: [5, 5],
       tiles: [],
@@ -32,11 +36,11 @@ class App extends Component {
     });
 
     this.initializeTiles();
-    window.addEventListener('resize', this.setGridSize);
+    window.addEventListener("resize", this.setGridSize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setGridSize);
+    window.removeEventListener("resize", this.setGridSize);
   }
 
   setGridSize(size = []) {
@@ -48,25 +52,29 @@ class App extends Component {
       const [columns, rows] = size;
       //this.updateTrendPositions(size);
 
-      this.setState({
-        gridSize: [size[1], size[0]],
-        trendItemCount: columns * rows,
-        fontSize: getFontSize(size[1], size[0])
-      }, this.initializeTiles);
+      this.setState(
+        {
+          gridSize: [size[1], size[0]],
+          trendItemCount: columns * rows,
+          fontSize: getFontSize(size[1], size[0])
+        },
+        this.initializeTiles
+      );
     }
   }
 
   onChangeDataSet = ({ target }) => {
-    this.setState({
-      dataSet: target.value,
-      tiles: []
-    }, this.initializeTiles);
+    this.setState(
+      {
+        dataSet: target.value,
+        tiles: []
+      },
+      this.initializeTiles
+    );
   };
 
   getGridStyles = () => {
-    const {
-      gridSize
-    } = this.state;
+    const { gridSize } = this.state;
     const columns = gridSize[0];
     const rows = gridSize[1];
     const columnWidth = 100 / columns;
@@ -79,24 +87,27 @@ class App extends Component {
   };
 
   initializeTiles = () => {
-    const {
-      dataSet,
-      gridSize,
-      fontSize
-    } = this.state;
+    const { dataSet, gridSize, fontSize } = this.state;
 
     const totalTiles = gridSize[0] * gridSize[1];
     const newTiles = [];
     // console.log(this.state);
     if (!isUndefined(this.props.dataSets)) {
-      if (this.props && Object.keys(this.props.dataSets).length !== 0 && this.props.dataSets.constructor === Object) {
+      if (
+        this.props &&
+        Object.keys(this.props.dataSets).length !== 0 &&
+        this.props.dataSets.constructor === Object
+      ) {
         for (let i = 0; i < totalTiles; i++) {
           newTiles.push(
-            (< Tile dataSet={dataSet}
+            <Tile
+              dataSet={dataSet}
               dataSets={this.props.dataSets}
-              key={`tile-${i}`} fontSize={fontSize} />)
+              key={`tile-${i}`}
+              fontSize={fontSize}
+            />
           );
-          console.log(fontSize)
+          console.log(fontSize);
         }
       }
     } else {
@@ -109,10 +120,7 @@ class App extends Component {
   };
 
   render() {
-    const {
-      dataSet,
-      tiles
-    } = this.state;
+    const { dataSet, tiles } = this.state;
 
     return (
       <div className="app">
@@ -123,16 +131,12 @@ class App extends Component {
 
         <DataSetSelect dataSet={dataSet} onChange={this.onChangeDataSet} />
 
-        <div className="tiles" style={this.getGridStyles()} >
+        <div className="tiles" style={this.getGridStyles()}>
           {tiles}
         </div>
 
-        <div className="logo">
-          <img src="./logo.png" alt="World Trends" />
-        </div>
-
-      </div >
-
+        <div className="logo">Hot Trends</div>
+      </div>
     );
   }
 }

@@ -1,20 +1,20 @@
 html,
 body,
 .tiles {
-  font-family: 'Product Sans', Arial, sans-serif;
+  font-family: "Product Sans", Arial, sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-.logo{
+.logo {
   position: absolute;
   bottom: 5px;
   right: 5px;
-}
-
-.logo>img{
   height: 30px;
-  width: 200px;
+  width: 160px;
+  color: #ffffff;
+  font-size: xx-large;
+  font-weight: 600;
 }
